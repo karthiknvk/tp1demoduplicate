@@ -1,0 +1,33 @@
+body{
+  position: relative;
+  
+}
+
+.container.page-container{
+  position: relative;
+  margin: 0px;
+
+}
+.filter-form-div{
+  width: fit-content;
+  font-size: 20px;
+  font-weight: bold;
+}
+.landscape-filter-part{
+  display: grid;
+
+}
+
+.col.custom-col-2{
+ position: fixed;
+ max-width: 30%; 
+}
+.col.custom-col{
+  margin-left: 300px;
+  width: 70%;
+}
+.select-package-button-part{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

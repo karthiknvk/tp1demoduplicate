@@ -1,0 +1,36 @@
+body{
+  position: relative;
+}
+.h1-part{
+  margin-top: 30px;
+  margin-bottom: 50px;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  
+}
+.day-heading-part{
+  margin-top: 30px;
+  margin-bottom: 50px;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+.row.day-image-part{
+  
+}
+.col.day-image-part{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+.whole-day-part{
+  
+}
+.day-heading-part{
+
+}
+.day-itinerary-part{
+
+}
