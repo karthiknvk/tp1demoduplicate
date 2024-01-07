@@ -155,8 +155,8 @@
         
         <select name="day" id="day" required="">
           <option value="">Select days</option>
-          {% for day in daylist %}
-          <option value="{{day}}">{{day}}</option>
+          {% for day,dayvalue in daylist.items %}
+          <option value="{{dayvalue}}">{{day}}</option>
           {% endfor %}
         </select>
         <br />

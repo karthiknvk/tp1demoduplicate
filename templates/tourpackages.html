@@ -14,12 +14,203 @@
 
 </head>
 <body>
+  <header class="container-fluid bg-info">
+    <div class="row text-white">
+      <div class="col-md-6 col-7 p-3">
+        <!--add logo-->
+
+        <h2>TRIP PLANNER</h2>
+      </div>
+      <div class="col-md-6 col-5 my-auto">
+        <nav class="navbar navbar-expand-lg bg-info">
+          <div class="container-fluid">
+            <button
+              class="navbar-toggler ms-auto mb-2 mb-lg-0"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <!-- <a
+                    class="nav-link active text-white"
+                    aria-current="page"
+                    href="#"
+                    >Home</a
+                  > -->
+                    <a href="/usercontribution/addspot">
+                    <button
+                    class="nav-b btn btn-outline-secondary me-2"
+                    type="button"
+                  >
+                    Add New Spots
+                  </button>
+                    </a>
+                  
+                </li>
+                
+                <li class="nav-item">
+                  <!--<a
+                    class="nav-link active text-white"
+                    aria-current="page"
+                    href="#"
+                    >Add New Sports</a
+                  > -->
+                  <a href="/usercontribution/addreview">
+                    <button
+                    class="nav-b btn btn-outline-secondary me-2"
+                    type="button"
+                  >
+                    Review
+                  </button>
+                  </a>
+                  
+                </li>
+                <li class="nav-item">
+                  <!-- <a
+                    class="nav-link active text-white"
+                    aria-current="page"
+                    href="#"
+                    >Review</a
+                  > -->
+                  <a href="logout">
+                    <button
+                    class="nav-b btn btn-outline-secondary me-2"
+                    type="button"
+                  >
+                    Logout
+                  </button>
+                  </a>
+                  
+                </li>
+                <li class="nav-item">
+                  <!-- <a
+                    class="nav-link active text-white"
+                    aria-current="page"
+                    href="#"
+                    >Review</a
+                  > -->
+                  <a href="accountview">
+                    <button
+                    class="nav-b btn btn-outline-secondary me-2"
+                    type="button"
+                  >
+                    Account
+                  </button>
+                  </a>
+                  
+                </li>
+                
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
   <div class="top-part">
     <h1>TOUR PACKAGES</h1>
   </div>
   
   <br>
   <br>
+
+  <!--for test purpose-->
+
+  <div class="top-part">
+    <h2>{{day}}s</h2>
+  </div>
+  <br>
+  <br>
+  <div class="container page-container">
+    <div class="row">
+      <div class="col custom-col-2">
+        <div class="landscape-filter-part">
+          <h5>CHOOSE YOUR LANDSCAPE</h5>
+          <form class="filter-form-div" id="filterForm" action="packageview" method="POST">
+            {% csrf_token %}
+            <h4><label><input type="checkbox" name="filter" value="Temple"> Temple</label></h4>
+            <h4><label><input type="checkbox" name="filter" value="Beach"> Beach</label></h4>
+            <h4><label><input type="checkbox" name="filter" value="Park"> Park</label></h4>
+            <h4><label><input type="checkbox" name="filter" value="Museum"> Museum</label></h4>
+            <h4><label><input type="checkbox" name="filter" value="Waterfalls"> Waterfalls</label></h4>
+            <h4><label><input type="checkbox" name="filter" value="Hill"> Hill</label></h4>
+            
+            <button type="submit" name="filterform">Apply Filters</button>
+          </form>
+        </div>
+        <br>
+        <br>
+        <div class="select-accommodations-button-part">
+          <form method="post" action="/accommodations/listofaccommodationsview">
+            {% csrf_token %}
+            <input type="hidden" name="district" value="{{ district }}">
+            <button
+            class="nav-b btn btn-outline-secondary me-2"
+            type="submit"
+          >
+            ACCOMMODATIONS
+          </button>
+          </form>
+        </div>
+      </div>
+      
+      <div class="col custom-col">
+        {% for packagecode,packagedetailslist in mainpackagedict.items %}
+        <div class="container">
+          <h4>Package:{{packagecode}}</h4></li>
+          <br>
+          <br>
+          <div class="row row-cols-3">  
+            <br>
+            {% for package in packagedetailslist %}
+            <div class="col">
+                  <h5>{{ package.5 }}</h5>
+                  <ul type="square">
+                    <li type="none">
+                      <br>
+                      <img src="{{package.10.url}}" alt="no image found" style="height: 150px; width:150px;"></li>
+                    <li>Location    :{{package.6}}</li>
+                    <li>Landscape   :{{package.7}}</li>
+                    <li>Cafespot    :{{package.8}}</li>
+                    <li>Description :{{package.9}}</li>
+                    <br>
+                  </ul>
+            </div> 
+            {% endfor %}
+          </div>
+        </div>
+        <div class="select-package-button-part">
+          <form method="post" action="packageview">
+            {% csrf_token %}
+            <input type="hidden" name="package_code" value="{{ packagecode }}">
+            <button
+            class="nav-b btn btn-outline-secondary me-2"
+            type="submit"
+            name="itinerary"
+          >
+            Select Package
+          </button>
+          </form>
+        </div>
+        <br><br>
+        {% endfor %}
+      </div>
+      
+      <br>
+    </div> 
+  </div>
+
+  <!-- for test-->
+
+
+
 
 
   <!--FOR 1 DAY PACKAGES-->

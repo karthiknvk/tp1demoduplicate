@@ -1,62 +1,6 @@
 from django.db import models
 
 # Create your models here.
-class Set1(models.Model):
-  id=models.AutoField(primary_key=True)
-  packagnumber=models.IntegerField()
-  district=models.CharField(max_length=100)
-  location=models.CharField(max_length=100)
-  spotname=models.CharField(max_length=100)
-  landscape=models.CharField(max_length=100)
-  pricerequired=models.IntegerField()
-  timerequired=models.IntegerField()
-  img=models.ImageField(upload_to='set1')
-  
-class Set2(models.Model):
-  id=models.AutoField(primary_key=True)
-  packagnumber=models.IntegerField()
-  district=models.CharField(max_length=100)
-  location=models.CharField(max_length=100)
-  spotname=models.CharField(max_length=100)
-  landscape=models.CharField(max_length=100)
-  pricerequired=models.IntegerField()
-  timerequired=models.IntegerField()
-  img=models.ImageField(upload_to='set2')
-
-class Set3(models.Model):
-  id=models.AutoField(primary_key=True)
-  packagnumber=models.IntegerField()
-  district=models.CharField(max_length=100)
-  location=models.CharField(max_length=100)
-  spotname=models.CharField(max_length=100)
-  landscape=models.CharField(max_length=100)
-  pricerequired=models.IntegerField()
-  timerequired=models.IntegerField()
-  img=models.ImageField(upload_to='set3')
-
-class Set4(models.Model):
-  id=models.AutoField(primary_key=True)
-  packagnumber=models.IntegerField()
-  district=models.CharField(max_length=100)
-  location=models.CharField(max_length=100)
-  spotname=models.CharField(max_length=100)
-  landscape=models.CharField(max_length=100)
-  pricerequired=models.IntegerField()
-  timerequired=models.IntegerField()
-  img=models.ImageField(upload_to='set4')
-
-class Packageset(models.Model):
-  id=models.AutoField(primary_key=True)
-  district=models.CharField(max_length=100)
-  packagnumber=models.IntegerField()
-  location=models.CharField(max_length=100)
-  spotnumber=models.IntegerField()
-  spotname=models.CharField(max_length=100)
-  landscape=models.CharField(max_length=100)
-  cafespot=models.CharField(max_length=100)
-  description=models.CharField(max_length=250)
-  img=models.ImageField(upload_to='packageset')
-
 class Destination(models.Model):
   spotname=models.CharField(max_length=100)
   location=models.CharField(max_length=100)
@@ -253,3 +197,51 @@ class Sevendaypackage(models.Model):
         db_table_comment = "packages for 7day tour selection"  #for comments
         ordering = ['id']
   
+
+class Tourpackage(models.Model):
+  MORNING = 'Morning'
+  AFTERNOON = 'Afternoon'
+  EVENING = 'Evening'
+
+  TIME_CHOICES = [
+        (MORNING, 'Morning'),
+        (AFTERNOON, 'Afternoon'),
+        (EVENING, 'Evening'),
+    ]
+  
+  ONEDAYPACKAGE='1daypackage'
+  TWODAYPACKAGE='2daypackage'
+  THREEDAYPACKAGE='3daypackage'
+  FOURDAYPACKAGE='4daypackage'
+  FIVEDAYPACKAGE='5daypackage'
+  SIXDAYPACKAGE='6daypackage'   
+  SEVENDAYPACKAGE='7daypackage'
+
+  CATEGORY_CHOICES=[
+       (ONEDAYPACKAGE, '1daypackage'),
+       (TWODAYPACKAGE, '2daypackage'),
+       (THREEDAYPACKAGE, '3daypackage'),
+       (FOURDAYPACKAGE, '4daypackage'),
+       (FIVEDAYPACKAGE, '5daypackage'),
+       (SIXDAYPACKAGE, '6daypackage'),
+       (SEVENDAYPACKAGE, '7daypackage'),
+
+  ]
+
+
+  id=models.AutoField(primary_key=True)
+  packagecategory=models.CharField(max_length=20, choices=CATEGORY_CHOICES)
+  district=models.CharField(max_length=100)
+  packagenumber=models.PositiveIntegerField()
+  daynumber=models.PositiveIntegerField()
+  spottime=models.CharField(max_length=20, choices=TIME_CHOICES)
+  spotname=models.ForeignKey(Destination, on_delete=models.CASCADE,default=None)
+  
+  def __str__(self):
+        objectname=self.packagecategory+'->'+self.district+str(self.packagenumber)+'->Day '+str(self.daynumber)+'->'+self.spottime+'->'+str(self.spotname)
+        return objectname
+  
+  class Meta:
+        #db_table = "7daypackage" for db name
+        db_table_comment = "packages for 7day tour selection"  #for comments
+        ordering = ['id']
